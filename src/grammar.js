@@ -123,7 +123,7 @@ module.exports = grammar({
       seq(
         choice(
           seq("account", $.account),
-          seq("commodity", $.commodity),
+          seq("commodity", optional($.amount)),
           seq("P", $.date, $.commodity, $.amount),
           seq("decimal-mark", field("mark", choice(".", ","))),
           seq("payee", field("payee", $._rest_of_line)),
@@ -142,7 +142,7 @@ module.exports = grammar({
       token(
         seq(
           /[^\r\n;#\s]+/, // first path segment (required)
-          /(\s+[^\r\n;#\s]+)*/, // additional segments with spaces
+          /([ \t]+[^\r\n;#\s]+)*/, // additional segments with spaces
         ),
       ),
 
