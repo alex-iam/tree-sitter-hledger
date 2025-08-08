@@ -123,7 +123,7 @@ module.exports = grammar({
       seq(
         choice(
           seq("account", $.account),
-          seq("commodity", optional($.amount)),
+          seq("commodity", choice($.commodity, $.amount)),
           seq("P", $.date, $.commodity, $.amount),
           seq("decimal-mark", field("mark", choice(".", ","))),
           seq("payee", field("payee", $._rest_of_line)),
